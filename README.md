@@ -4,21 +4,21 @@
 All the information here is in more detail in: [The best way to store your dotfiles](https://www.atlassian.com/git/tutorials/dotfiles)
 
 1. **First you will need the alias:**
-   `alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"`
+   `alias df="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"`
 
 1. **Clone the repo into your home directory
    `git clone --bare  https://github.com/jpantao/.dotfiles.git $HOME/.dotfiles`
 
 1. **Then checkout the contents from the repository to your home directory:**
-   `dotfiles checkout`
+   `df checkout`
 
    This is likely fail because you might already have configuration files that would be overwritten. Just backup the files or simply remove them and repeat the checkout.
 
 1. **Set the showUntrackedFiles flag to no:**
-   `dotfiles config --local status.showUntrackedFiles no`
+   `df config --local status.showUntrackedFiles no`
 
 1. **Pulling updates:**
-   `dotfiles pull`
+   `df pull`
 
 
 ## Dependencies:
