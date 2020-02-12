@@ -11,14 +11,13 @@ I'm a Computer Science student and emacs is my editor of choice.
 This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_programming][literate]] programming using [[https://orgmode.org/][Org]].
 
 * Bugs
-  * Bugs
   List of all the bugs found while setting up the configuration.
 ** FIXED *BUG Fix spinner -1.7.3 bug
    CLOSED: [2020-01-26 dom 01:07]
    - State "FIXED"      from              [2020-01-26 dom 01:07]
     - State "FIXED"      from "KNOWN"      [2019-12-30 seg 11:45]
     Fix: A way to fix it is by doing package-instal-file on spinner.el
-*** FIXED SSL/TLL issue.
+** FIXED SSL/TLL issue.
     CLOSED: [2019-12-30 seg 11:39]
     - State "FIXED"      from "TODO"       [2019-12-30 seg 11:39]
     Fix:
@@ -34,7 +33,6 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    #+NAME: faster-startup
    #+BEGIN_SRC emacs-lisp
 	 (setq package-enable-at-startup nil
-		   file-name-handler-alist nil
 		   message-log-max 16384
 		   gc-cons-threshold 402653184
 		   gc-cons-percentage 0.6
@@ -43,8 +41,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 
 	 (add-hook 'after-init-hook
 			   `(lambda ()
-				  (setq file-name-handler-alist file-name-handler-alist-old
-						gc-cons-threshold 800000
+				  (setq gc-cons-threshold 800000
 						gc-cons-percentage 0.1)) t)
    #+END_SRC
 
@@ -101,8 +98,9 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    Emacs theme.
    #+NAME: theme
    #+BEGIN_SRC emacs-lisp
-     (use-package doom-themes
-       :config( load-theme 'doom-city-lights t))
+	 (use-package doom-themes
+	   :config
+	   (load-theme 'doom-city-lights t))
    #+END_SRC
 
 ** Fonts
@@ -174,13 +172,13 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    - Stop backup noise by setting a backup directory.
      #+NAME: backup-directory
      #+BEGIN_SRC emacs-lisp
-       (setq backup-directory-alist `(("." . "~/.saves"))
-         backup-by-copying t
-         delete-old-versions t
-         kept-new-versions 8
-         kept-old-versions 8
-         version-control t
-         auto-save-list-file-prefix nil)
+	   (setq backup-directory-alist `(("." . "~/.saves"))
+		 backup-by-copying t
+		 delete-old-versions t
+		 kept-new-versions 8
+		 kept-old-versions 8
+		 version-control t
+		 auto-save-list-file-prefix nil)
      #+END_SRC
 
      - Stop Emacs fromwriting in init.el
@@ -248,6 +246,10 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 	  ;; recomended settings
 	  (setq ivy-use-virtual-buffers t)
 	  (setq ivy-count-format "(%d/%d) ")
+
+	  ;; ignore regex tokens order
+	  (setq ivy-re-builders-alist
+			'((t . ivy--regex-ignore-order)))
     #+END_SRC
 *** avy
 	avy is a GNU Emacs package for jumping to visible text using a char-based decision tree.
@@ -263,25 +265,6 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
     #+BEGIN_SRC emacs-lisp
 	  (use-package swiper
 		:bind ("M-s" . swiper))
-    #+END_SRC
-*** counsel
-	Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
-    #+NAME: counsel
-    #+BEGIN_SRC emacs-lisp
-	  (use-package counsel
-		:bind (("M-x" . counsel-M-X)
-			   ("M-x" . counsel-M-x)
-			   ("C-x C-f" . counsel-find-file)
-			   ("C-x y" . counsel-yank-pop)
-			   ("<f1> f" . counsel-describe-function)
-			   ("<f1> v" . counsel-describe-variable)
-			   ("<f1> l" . counsel-find-library)
-			   ("<f2> i" . counsel-info-lookup-symbol)
-			   ("<f2> u" . counsel-unicode-char)
-			   ("<f2> j" . counsel-set-variable))
-		:config
-		;; remove the ^ from the default regex
-		(setq-default ivy-initial-inputs-alist nil))
     #+END_SRC
 *** projectile
 	Projectile is a project interaction library for Emacs. Its goal is to provide a nice set of features operating on a project level without introducing external dependencies.
@@ -303,6 +286,25 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 	  ;; ag silver searcher
 	  (use-package ag)
 	#+END_SRC
+*** counsel
+	Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+    #+NAME: counsel
+    #+BEGIN_SRC emacs-lisp
+	  (use-package counsel
+		:bind (("M-x" . counsel-M-X)
+			   ("M-x" . counsel-M-x)
+			   ("C-x C-f" . counsel-find-file)
+			   ("C-x y" . counsel-yank-pop)
+			   ("<f1> f" . counsel-describe-function)
+			   ("<f1> v" . counsel-describe-variable)
+			   ("<f1> l" . counsel-find-library)
+			   ("<f2> i" . counsel-info-lookup-symbol)
+			   ("<f2> u" . counsel-unicode-char)
+			   ("<f2> j" . counsel-set-variable))
+		:config
+		;; remove the ^ from the default regex
+		(setq-default ivy-initial-inputs-alist nil))
+    #+END_SRC
 
 *** treemacs
 	File explorer for emacs full of features.
@@ -400,7 +402,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 	  (use-package all-the-icons)
     #+END_SRC
 ** Git
-    Using git in Emacs.
+   Using git in Emacs.
 *** magit
     Git interface for Emacs.
     #+NAME: magit
@@ -426,6 +428,156 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 	  (use-package git-timemachine
 		:bind ("M-g t" . git-timemachine))
     #+END_SRC
+** Programming
+*** smartparens
+	Smartparens is a minor mode for dealing with pairs in Emacs.
+    #+NAME: smartparens
+    #+BEGIN_SRC emacs-lisp
+	  (use-package smartparens
+		:diminish smartparens-mode
+        :hook (prog-mode . smartparens-mode))
+    #+END_SRC
+*** yasippet
+	Snippets.
+	#+NAME: yasnippets
+	#+BEGIN_SRC emacs-lisp
+	  (use-package yasnippet
+		:diminish yas-minor-mode
+		:hook (prog-mode . yas-minor-mode)
+		:config
+		(use-package yasnippet-snippets
+		  :config
+		  (yas-reload-all)))
+	#+END_SRC
+
+*** flycheck
+	Modern on-the-fly syntax checking extension for GNU Emacs.
+	#+BEGIN_SRC emacs-lisp
+	  (use-package flycheck
+		:diminish
+		:init (global-flycheck-mode))
+	  (use-package flycheck-pos-tip
+		:after flycheck
+		:config (flycheck-pos-tip-mode))
+	#+END_SRC
+
+*** company
+	Company is a text completion framework for Emacs. The name stands for "complete anything".
+	#+NAME: company
+	#+BEGIN_SRC emacs-lisp
+	  (use-package company
+		:diminish
+		:bind (:map company-active-map
+					("C-n" . company-select-next)
+					("C-p" . company-select-previous))
+		:init
+		(add-hook 'after-init-hook 'global-company-mode)
+		(setq company-require-match 'never
+			  company-minimum-prefix-length 2
+			  company-tooltip-align-annotations t
+			  company-idle-delay 1
+			  company-tooltip-limit 20
+			  global-company-mode t))
+	#+END_SRC
+
+*** lsp
+	Client for Language Server Protocol (v3.14). lsp-mode aims to provide IDE-like experience by providing optional integration with the most popular Emacs packages like company, flycheck and projectile.
+    #+NAME: lsp-mode
+	#+BEGIN_SRC emacs-lisp
+	  (use-package lsp-mode
+		:hook ((scala-mode . lsp)
+			   (python-mode . lsp)
+			   (java-mode . lsp)
+			   (js-mode . lsp)
+			   (sh-mode . lsp)
+			   (c-mode . lsp))
+		:config
+		(setq lsp-prefer-flymake nil))
+
+
+	  ;; optionally
+	  (use-package lsp-ui
+		:after lsp-mode
+		:hook (lsp-mode-hook . lsp-ui-mode))
+
+	  (use-package company-lsp
+		:after '(company lsp-mode)
+		:config
+		(setq company-lsp-cache-candidates t
+			  company-lsp-async t
+			  company-lsp-enable-snippet t)
+		(push 'company-lsp company-backends))
+
+	  (use-package company-box
+		:diminish
+		:hook (company-mode . company-box-mode))
+
+	  ;; if you are helm user
+	  ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+
+	  ;; if you are ivy user
+	  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+	  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+	  ;; optionally if you want to use debugger
+	  ;;(use-package dap-mode)
+	  ;;(use-package dap-LANGUAGE) to load the dap adapter for your language
+
+	#+END_SRC
+
+*** C
+	irony-mode is an Emacs minor-mode that aims at improving the editing experience for the C, C++ and Objective-C languages.
+	#+BEGIN_SRC emacs-lisp
+	  (use-package irony
+		:diminish
+		:hook (c++-mode-hook . irony-mode)
+		:hook (objc-mode-hook . irony-mode)
+		:hook (irony-mode . irony-cdb-autosetup-compile-options)
+		:hook (c-mode-hook . irony-mode))
+
+	  ;; support for company
+	  (use-package company-irony
+		:after '(company irony)
+		:config (add-to-list 'company-backends 'company-irony))
+
+	  ;;  This allows us to read docs while irony is working.
+	  (use-package irony-eldoc
+		:after '(irony))
+	#+END_SRC
+
+*** Java
+	#+BEGIN_SRC emacs-lisp
+	  (use-package lsp-java)
+	#+END_SRC
+*** Scala
+	Enable scala-mode and sbt-mode.
+	#+BEGIN_SRC emacs-lisp
+	  (use-package scala-mode
+		:mode "\\.s\\(cala\\|bt\\)$")
+
+	  (use-package sbt-mode
+		:diminish
+		:commands sbt-start sbt-command
+		:config
+		;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+		;; allows using SPACE when in the minibuffer
+		(substitute-key-definition
+		 'minibuffer-complete-word
+		 'self-insert-command
+		 minibuffer-local-completion-map)
+		 ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+		 (setq sbt:program-options '("-Dsbt.supershell=false")))
+	#+END_SRC
+
+*** JavaScript
+	#+BEGIN_SRC emacs-lisp
+	  (use-package js2-mode
+		:config
+		(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+	#+END_SRC
+
+*** TODO Rust
+*** TODO Go
 
 ** Org
    Org-mode is a document editing, formatting, and organizing mode, designed for notes, planning, and authoring within the free software text editor Emacs.
@@ -470,5 +622,3 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
      (use-package ox-hugo
        :after org)
    #+END_SRC
-
-** Programming
