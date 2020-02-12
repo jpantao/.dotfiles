@@ -622,3 +622,27 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
      (use-package ox-hugo
        :after org)
    #+END_SRC
+** LaTex
+   #+BEGIN_SRC emacs-lisp
+	 (use-package tex
+	   :ensure auctex
+	   :config
+	   (setq TeX-auto-save t
+			 TeX-parse-self t
+			 TeX-view-program-selection '(((output-dvi has-no-display-manager)
+										   "dvi2tty")
+										  ((output-dvi style-pstricks)
+										   "dvips and gv")
+										  (output-dvi "xdvi")
+										  (output-pdf "mupdf")
+										  (output-html "xdg-open")))
+	   (add-to-list 'TeX-view-program-list '("mupdf" "mupdf %o")))
+
+
+	 ;; company backend
+	 (use-package company-auctex
+	   :after '(company tex)
+	   :config (company-auctex-init))
+
+
+   #+END_SRC
