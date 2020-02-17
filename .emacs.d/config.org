@@ -100,7 +100,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    #+BEGIN_SRC emacs-lisp
 	 (use-package doom-themes
 	   :config
-	   (load-theme 'doom-city-lights t))
+	   (load-theme 'doom-nord t))
    #+END_SRC
 
 ** Fonts
