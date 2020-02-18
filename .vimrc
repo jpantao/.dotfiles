@@ -4,4 +4,3 @@ set tabstop=4
 set expandtab
 syntax on
 set clipboard=unnamedplus
-colorscheme atom-dark-256
