@@ -100,7 +100,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    #+BEGIN_SRC emacs-lisp
 	 (use-package doom-themes
 	   :config
-	   (load-theme 'doom-nord t))
+	   (load-theme 'doom-city-lights t))
    #+END_SRC
 
 ** Fonts
@@ -358,7 +358,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 				treemacs-space-between-root-nodes      t
 				treemacs-tag-follow-cleanup            t
 				treemacs-tag-follow-delay              1.5
-				treemacs-width                         25)
+				treemacs-width                         43)
 
 		  ;; The default width and height of the icons is 22 pixels. If you are
 		  ;; using a Hi-DPI display, uncomment this to double the icon size.
