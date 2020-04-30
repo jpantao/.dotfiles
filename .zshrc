@@ -10,12 +10,6 @@ export ZSH="/home/jpantao/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="lambda"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -75,7 +69,7 @@ plugins=(
     tmux
     colored-man-pages
     zsh-syntax-highlighting 
-    zsh-autosuggestions   
+    zsh-autosuggestions
 )
 
 
@@ -107,8 +101,14 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
-
-alias zshconfig="vim ~/.zshrc"
+alias vim="nvim"
+alias zshconfig="nvim ~/.zshrc"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# dnf aliases
+alias dnfu="sudo dnf update && sudo dnf upgrade"
+alias dnfi="sudo dnf install"
+alias dnfr="sudo dnf remove"
+alias dnfar="sudo dnf autoremove"
+alias dnfs="dnf search"
 
