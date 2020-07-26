@@ -1,0 +1,120 @@
+;============================================
+;        _                   __                
+;       (_)___  ____ _____  / /_____ _____     
+;      / / __ \/ __ `/ __ \/ __/ __ `/ __ \    
+;     / / /_/ / /_/ / / / / /_/ /_/ / /_/ /    
+;  __/ / .___/\__,_/_/ /_/\__/\__,_/\____/     
+; /___/_/_  ____  / /_  __/ /_  ____ ______    
+;    / __ \/ __ \/ / / / / __ \/ __ `/ ___/    
+;   / /_/ / /_/ / / /_/ / /_/ / /_/ / /        
+;  / .___/\____/_/\__, /_.___/\__,_/_/         
+; /_/            /____/                        
+;                                            
+; Author: João Antão                             
+; Github: https://github.com/jpantao             
+;                                                 
+;============================================
+
+
+[colors]
+background = #222
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[global/wm]
+margin-top = 0 
+margin-bottom = 0
+
+[bar/i3-bar]
+monitor = ${env:MONITOR}
+width = 100%
+height = 20
+fixed-center = true 
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+modules-left = i3 xwindow 
+modules-center = date 
+modules-right = pulseaudio backlight battery  
+
+tray-position = right
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 4
+tray-scale = 1.0
+
+
+[module/i3]
+type = internal/i3
+index-sort = true
+enable-scroll = false
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 50
+format-pading = 2
+
+[module/date]
+type = internal/date
+date = %d-%m-%Y%
+time = %H:%M
+label = %date% %time%
+
+[module/battery]
+type = internal/battery
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+
+
+
+
+
