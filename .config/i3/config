@@ -78,7 +78,7 @@ gaps outer 5
 bindsym $mod+Return exec $term
 
 # Start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run 
+bindsym $mod+d exec dmenu_run 'Hack-11' 
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -87,7 +87,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+z split h 	    #horizontal
 bindsym $mod+v split v	    #vertical
 bindsym $mod+q split toggle
-
+bindsym $mod+x layout toggle
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -141,6 +141,28 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 
+# Move workspace between oputputs
+bindsym $mod+Ctrl+h     move workspace to output left
+bindsym $mod+Ctrl+Left  move workspace to output left
+bindsym $mod+Ctrl+j     move workspace to output down 
+bindsym $mod+Ctrl+Down  move workspace to output down
+bindsym $mod+Ctrl+k     move workspace to output up 
+bindsym $mod+Ctrl+Up    move workspace to output up
+bindsym $mod+Ctrl+l     move workspace to output right 
+bindsym $mod+Ctrl+Right move workspace to output right
+
+# Resize control
+bindsym $mod+m	     resize grow   width 5 px or 5 ppt
+bindsym $mod+Shift+m resize shrink width 5 px or 5 ppt
+bindsym $mod+n       resize grow   height 5 px or 5 ppt  
+bindsym $mod+Shift+n resize shrink height 5 px or 5 ppt 
+
+# Gaps control
+bindsym $mod+o          gaps outer current plus 5
+bindsym $mod+i          gaps inner current plus 5
+bindsym $mod+Shift+o    gaps outer current minus 5
+bindsym $mod+Shift+i    gaps inner current minus 5
+
 # Volume control (Pulse Audio)
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -153,11 +175,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5%
 bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -S 100%
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -S 3%
 
-# Gaps control
-bindsym $mod+o 		gaps outer current plus 5
-bindsym $mod+i          gaps inner current plus 5
-bindsym $mod+Shift+o 	gaps outer current minus 5
-bindsym $mod+Shift+i	gaps inner current minus 5
+# Lock screen
+bindsym $mod+Escape exec --no-startup-id dm-tool lock
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -175,4 +194,3 @@ bar {
 	i3bar_command	i3bar
 
 }
-
