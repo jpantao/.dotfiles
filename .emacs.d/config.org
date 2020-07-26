@@ -7,7 +7,6 @@
 #+OPTIONS: num:nil
 #+PROPERTY: header-args :results silent
 
-I'm a Computer Science student and emacs is my editor of choice.
 This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_programming][literate]] programming using [[https://orgmode.org/][Org]].
 
 * Bugs
