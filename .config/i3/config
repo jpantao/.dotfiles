@@ -18,6 +18,7 @@
 ### Autostart ###
 #################
 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh i3-bar
 exec_always --no-startup-id "setxkbmap -layout pt"
 exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
@@ -68,7 +69,7 @@ smart_borders no_gaps
 
 # Set inner/outer gaps
 gaps inner 5
-gaps outer 5
+gaps outer 0
 
 ###################
 ### Keybindings ###
@@ -78,7 +79,7 @@ gaps outer 5
 bindsym $mod+Return exec $term
 
 # Start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run 'Hack-11' 
+bindsym $mod+d exec dmenu_run -fn 'Hack-11' 
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -186,11 +187,3 @@ bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-msg exit"
-
-# Temporary bar
-bar {
-        position        top
-	status_command  i3status
-	i3bar_command	i3bar
-
-}
