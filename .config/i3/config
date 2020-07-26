@@ -14,40 +14,65 @@
 #
 # i3 config file (v4)
 
-# Autostart
-exec --no-startup-id nitrogen --restore
+#################
+### Autostart ###
+#################
+
+exec_always --no-startup-id "setxkbmap -layout pt"
+exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
 
-# Load keyboard layout
-exec --no-startup-id "setxkbmap -layout pt"
+###################
+### i3 settings ###
+###################
 
-# Volume control (Pulse Audio)
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# Workspace names
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
 
-# Brighness control
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5%
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5% 
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -S 100% 
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -S 3% 
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4                  
 
-# i3 Font (window titles)
-font pango:monospace 11
+# Set terminal emulator
+set $term xfce4-terminal       
 
-# Remove title bar
+# i3 Font
+font pango:monospace 11 	
+
+# Border settings 
 default_border 		none
 default_floating_border none
 
-# Set mod key 
-set $mod Mod4
+# Floating settings
+floating_modifier $mod	
 
-# Set terminal emulator
-set $term xfce4-terminal
+########################
+### i3-gaps settings ###
+########################
 
-# Use Mouse+$mod to drag floating windows
-floating_modifier $mod
+# Only enable gaps on a workspace when there is at least one container
+# smart_gaps on
+
+# Activate smart borders (always)
+smart_borders on
+
+# Activate smart borders (only when there are effectively no gaps)
+smart_borders no_gaps
+
+# Set inner/outer gaps
+gaps inner 5
+gaps outer 5
+
+###################
+### Keybindings ###
+###################
 
 # Launch terminal
 bindsym $mod+Return exec $term
@@ -58,11 +83,11 @@ bindsym $mod+d exec dmenu_run
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-# Split in horizontal orientation
-bindsym $mod+z split h
+# Split orientation
+bindsym $mod+z split h 	    #horizontal
+bindsym $mod+v split v	    #vertical
+bindsym $mod+q split toggle
 
-# Split in vertical orientation
-bindsym $mod+v split v
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -94,17 +119,6 @@ bindsym $mod+Shift+Up 	 move up
 bindsym $mod+Shift+l 	 move right
 bindsym $mod+Shift+Right move right
 
-# Workspace names
-set $ws1  "1"
-set $ws2  "2"
-set $ws3  "3"
-set $ws4  "4"
-set $ws5  "5"
-set $ws6  "6"
-set $ws7  "7"
-set $ws8  "8"
-set $ws9  "9"
-
 # Switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -127,6 +141,24 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 
+# Volume control (Pulse Audio)
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Brighness control
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5%
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5%
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -S 100%
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -S 3%
+
+# Gaps control
+bindsym $mod+o 		gaps outer current plus 5
+bindsym $mod+i          gaps inner current plus 5
+bindsym $mod+Shift+o 	gaps outer current minus 5
+bindsym $mod+Shift+i	gaps inner current minus 5
+
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -140,22 +172,7 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 bar {
         position        top
 	status_command  i3status
+	i3bar_command	i3bar
+
 }
-
-########################
-### i3-gaps settings ###
-########################
-
-# Only enable gaps on a workspace when there is at least one container
-# smart_gaps on
-
-# Activate smart borders (always)
-smart_borders on
-
-# Activate smart borders (only when there are effectively no gaps)
-smart_borders no_gaps
-
-# Set inner/outer gaps
-gaps inner 5
-gaps outer 5
 
