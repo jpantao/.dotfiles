@@ -17,15 +17,35 @@
 #################
 ### Autostart ###
 #################
-
+exec_always --no-startup-id setxkbmap pt
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh i3-bar
-exec_always --no-startup-id "setxkbmap -layout pt"
 exec_always --no-startup-id nitrogen --restore
+exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 
 ###################
 ### i3 settings ###
 ###################
+
+# Colors from ~/.Xresources
+set_from_resource $background background
+set_from_resource $foreground foreground
+set_from_resource $color0     color0
+set_from_resource $color1     color1
+set_from_resource $color2     color2
+set_from_resource $color3     color3
+set_from_resource $color4     color4
+set_from_resource $color5     color5
+set_from_resource $color6     color6
+set_from_resource $color7     color7
+set_from_resource $color8     color8
+set_from_resource $color9     color9
+set_from_resource $color10    color10
+set_from_resource $color11    color11
+set_from_resource $color12    color12
+set_from_resource $color13    color13
+set_from_resource $color14    color14
+set_from_resource $color15    color15
 
 # Workspace names
 set $ws1  "1"
@@ -42,14 +62,17 @@ set $ws9  "9"
 set $mod Mod4                  
 
 # Set terminal emulator
-set $term xfce4-terminal       
+set $term urxvt
 
 # i3 Font
 font pango:monospace 11 	
 
 # Border settings 
-default_border 		none
-default_floating_border none
+default_border 		pixel 1
+default_floating_border pixel 1
+# class                 border  bground  text        indicator child_border
+client.focused          $color4 $color4  $foregroung $color4   $color4
+hide_edge_borders smart
 
 # Floating settings
 floating_modifier $mod	
@@ -62,12 +85,12 @@ floating_modifier $mod
 # smart_gaps on
 
 # Activate smart borders (always)
-smart_borders on
+# smart_borders on
 
 # Activate smart borders (only when there are effectively no gaps)
-smart_borders no_gaps
+# smart_borders no_gaps
 
-# Set inner/outer gaps
+#client.unfocused Set inner/outer gaps
 gaps inner 5
 gaps outer 0
 
@@ -79,7 +102,7 @@ gaps outer 0
 bindsym $mod+Return exec $term
 
 # Start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'Hack-11' 
+bindsym $mod+d exec dmenu_run -nb '$background' -sf '$foreground' -sb '$color4' -nf '$foreground' -fn 'Hack-11' 
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -171,10 +194,10 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Brighness control
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5%
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5%
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -S 100%
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -S 3%
+bindsym XF86MonBrightnessUp 	    exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown 	    exec --no-startup-id xbacklight -dec 5
+bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id xbacklight -set 100
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -set 0
 
 # Lock screen
 bindsym $mod+Escape exec --no-startup-id dm-tool lock

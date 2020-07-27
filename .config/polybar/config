@@ -15,15 +15,17 @@
 ;                                                 
 ;============================================
 
-
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+background = ${xrdb:background}
+foreground = ${xrdb:foreground}
+
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color8 = ${xrdb:color8}
 
 [global/wm]
 margin-top = 0 
@@ -39,16 +41,16 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-0 = Inter-Regular:size=10
+font-1 = Font Awesome 5 Free:pixelsize=10
+font-2 = Font Awesome 5 Free Solid:pixelsize=10
+font-3 = Font Awesome 5 Brands:pixelsize=10
 
 modules-left = i3 xwindow 
-modules-center = date 
-modules-right = pulseaudio backlight battery  
+modules-center = cpu temperature memory
+modules-right = pulseaudio backlight battery date 
 
 tray-position = right
 tray-detached = false
@@ -56,9 +58,8 @@ tray-maxsize = 20
 tray-background = ${colors.background}
 tray-offset-x = 0
 tray-offset-y = 0
-tray-padding = 4
+tray-padding = 10
 tray-scale = 1.0
-
 
 [module/i3]
 type = internal/i3
@@ -68,12 +69,11 @@ pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.color8}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-background = ${colors.color4}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
@@ -82,13 +82,12 @@ label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
+label-visible-background = ${colors.color8} 
+label-visible-padding = 2
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${colors.alert}
+label-urgent-background = ${colors.color4}
 label-urgent-padding = 2
 
 [module/xwindow]
@@ -99,22 +98,56 @@ format-pading = 2
 
 [module/date]
 type = internal/date
-date = %d-%m-%Y%
+date = 
 time = %H:%M
-label = %date% %time%
+label = %time% %date%
+date-alt = %A, %d %B %Y
+time-alt = %H:%M
+format =  <label>
+
 
 [module/battery]
 type = internal/battery
+format-charging = <label-charging> <ramp-capacity>
+format-discharging = <label-discharging> <ramp-capacity>
+label-charging = %percentage%
+label-discharging = %percentage%
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
+format = <label>
+
+label = %percentage% 
 
 [module/pulseaudio]
 type = internal/pulseaudio
+use-ui-max = false
 
+format-volume = <ramp-volume>
+label-muted = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
+[module/cpu]
+type = internal/cpu
+format = <label>
+label = %percentage%% 
 
+[module/memory]
+type = internal/memory
+format = <label>
+label = %gb_used%/%gb_free% 
 
+[module/temperature]
+type = internal/temperature
+format = <label>
+label = %temperature-c% 
 
-
+; vim:ft=dosini
