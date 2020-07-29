@@ -1,6 +1,36 @@
 ! Color scheme
 #include </home/jpantao/.config/xcolors/faint>
 
+! special
+*.foreground: FOREGROUND
+*.background: BACKGROUND
+*.cursorColor:CURSORCOLOR
+! black
+*.color0:     COLOR0
+*.color8:     COLOR8
+! red
+*.color1:     COLOR1     
+*.color9:     COLOR9
+! green
+*.color2:     COLOR2
+*.color10:    COLOR10
+! yellow
+*.color3:     COLOR3
+*.color11:    COLOR11
+! blue
+*.color4:     COLOR4
+*.color12:    COLOR12
+! magenta
+*.color5:     COLOR5
+*.color13:    COLOR13
+! cyan
+*.color6:     COLOR6
+*.color14:    COLOR14
+! white
+*.color7:     COLOR7     
+*.color15:    COLOR15
+
+
 ! Urxvt config
 URxvt.scrollBar: false
 URxvt.font: xft:Hack:style=Regular:size=12
@@ -9,7 +39,6 @@ URxvt.italicFont: xft:Hack:style=Italic:size=12
 URxvt.boldItalicFont: xft:Hack:style=Bold Italic:size=12
 URxvt.letterSpace: 0
 
-! Perl extensions
 URxvt.perl-ext-common: default,matcher,resize-font
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
@@ -21,3 +50,12 @@ URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
 URxvt.keysym.C-S-0x56: eval:paste_clipboard
 URxvt.cursorBlink: 1
 URxvt.cursorUnderline: 1
+
+
+! rofi config
+!rofi.theme: .config/rofi/themes/dmenu-xcolors.rasi
+rofi.color-window: BACKGROUND, BACKGROUND, BACKGROUND
+rofi.color-normal: BACKGROUND, FOREGROUND, BACKGROUND, BACKGROUND, COLOR1
+rofi.color-active: BACKGROUND, FOREGROUND, BACKGROUND, BACKGROUND, COLOR1
+rofi.color-urgent: BACKGROUND, FOREGROUND, BACKGROUND, BACKGROUND, COLOR1
+rofi.hide-scrollbar: true

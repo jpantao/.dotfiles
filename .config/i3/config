@@ -104,8 +104,8 @@ gaps outer 0
 # Launch terminal
 bindsym $mod+Return exec $term
 
-# Start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '$background' -sf '$foreground' -sb '$color4' -nf '$foreground' -fn 'Hack-11' 
+# Start rofi (a program launcher)
+bindsym $mod+d exec rofi -show drun 
 
 # Kill focused window
 bindsym $mod+Shift+q kill
