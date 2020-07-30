@@ -1,5 +1,5 @@
 ! Color scheme
-#include </home/jpantao/.config/xcolors/faint>
+#include </home/jpantao/.config/xcolors/jpantao-green>
 
 ! special
 *.foreground: FOREGROUND

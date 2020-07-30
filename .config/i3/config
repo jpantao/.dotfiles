@@ -71,8 +71,9 @@ set $term urxvt
 font pango:monospace 11 	
 
 # Border settings 
-default_border 		pixel 1
-default_floating_border pixel 1
+default_border 		pixel 2
+default_floating_border pixel 2
+
 # class                 border  bground  text        indicator child_border
 client.focused          $color4 $color4  $foregroung $color4   $color4
 hide_edge_borders smart
@@ -104,8 +105,14 @@ gaps outer 0
 # Launch terminal
 bindsym $mod+Return exec $term
 
-# Start rofi (a program launcher)
+# Rofi
 bindsym $mod+d exec rofi -show drun 
+bindsym Mod1+Tab exec rofi -show window
+
+# Screenshots
+bindsym Print 	    exec "escrotum -s -C"
+bindsym Shift+Print exec "escrotum -C"
+
 
 # Kill focused window
 bindsym $mod+Shift+q kill

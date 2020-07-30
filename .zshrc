@@ -105,10 +105,4 @@ alias vim="nvim"
 alias zshconfig="nvim ~/.zshrc"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-# dnf aliases
-alias dnfu="sudo dnf update && sudo dnf upgrade"
-alias dnfi="sudo dnf install"
-alias dnfr="sudo dnf remove"
-alias dnfar="sudo dnf autoremove"
-alias dnfs="dnf search"
-
+alias lg="lazygit"
