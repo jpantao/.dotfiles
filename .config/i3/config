@@ -17,10 +17,9 @@
 #################
 ### Autostart ###
 #################
+exec_always --no-startup-id autorandr --change --force
 exec_always --no-startup-id setxkbmap pt
 exec_always --no-startup-id picom
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh i3-bar
-exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id autotiling
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
@@ -95,7 +94,7 @@ floating_modifier $mod
 # smart_borders no_gaps
 
 #client.unfocused Set inner/outer gaps
-gaps inner 5
+gaps inner 0
 gaps outer 0
 
 ###################

@@ -50,8 +50,8 @@ font-2 = Font Awesome 5 Free Solid:pixelsize=10
 font-3 = Font Awesome 5 Brands:pixelsize=10
 
 modules-left = i3 xwindow 
-modules-center = cpu temperature memory
-modules-right = pulseaudio backlight battery date 
+modules-center = date
+modules-right = cpu temperature memory pulseaudio backlight battery 
 
 tray-position = right
 tray-detached = false
@@ -106,14 +106,14 @@ time = %H:%M
 label = %time% %date%
 date-alt = %A, %d %B %Y
 time-alt = %H:%M
-format = <label> 
+format =  <label>
 
 
 [module/battery]
 type = internal/battery
-format-charging = <label-charging> <ramp-capacity>
+format-charging = <label-charging>
 format-discharging = <label-discharging> <ramp-capacity>
-label-charging = %percentage%
+label-charging = %percentage% 
 label-discharging = %percentage%
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -152,5 +152,7 @@ label = %gb_used%/%gb_free% 
 type = internal/temperature
 format = <label>
 label = %temperature-c% 
+
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
 
 ; vim:ft=dosini
