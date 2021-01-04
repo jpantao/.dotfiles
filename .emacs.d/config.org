@@ -106,7 +106,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
    Font settings.
    #+NAME: fonts
    #+BEGIN_SRC emacs-lisp
-     (set-frame-font "Fira Code 12" nil t)
+     (set-frame-font "Hack 12" nil t)
    #+END_SRC
 
 ** Other
@@ -392,14 +392,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 		(setq sml/theme 'respectful)
 		(sml/setup))
     #+END_SRC
-*** all-the-icons
-	Icons for Emacs.
-	#+NAME: all-the-icons
-    #+BEGIN_SRC emacs-lisp
-	  ;; Install the resource fonts when running for the first time
-	  ;; by running M-x all-the-icons-install-fonts
-	  (use-package all-the-icons)
-    #+END_SRC
+
 ** Git
    Using git in Emacs.
 *** magit
@@ -436,147 +429,7 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
 		:diminish smartparens-mode
         :hook (prog-mode . smartparens-mode))
     #+END_SRC
-*** yasippet
-	Snippets.
-	#+NAME: yasnippets
-	#+BEGIN_SRC emacs-lisp
-	  (use-package yasnippet
-		:diminish yas-minor-mode
-		:hook (prog-mode . yas-minor-mode)
-		:config
-		(use-package yasnippet-snippets
-		  :config
-		  (yas-reload-all)))
-	#+END_SRC
 
-*** flycheck
-	Modern on-the-fly syntax checking extension for GNU Emacs.
-	#+BEGIN_SRC emacs-lisp
-	  (use-package flycheck
-		:diminish
-		:init (global-flycheck-mode))
-	  (use-package flycheck-pos-tip
-		:after flycheck
-		:config (flycheck-pos-tip-mode))
-	#+END_SRC
-
-*** company
-	Company is a text completion framework for Emacs. The name stands for "complete anything".
-	#+NAME: company
-	#+BEGIN_SRC emacs-lisp
-	  (use-package company
-		:diminish
-		:bind (:map company-active-map
-					("C-n" . company-select-next)
-					("C-p" . company-select-previous))
-		:init
-		(add-hook 'after-init-hook 'global-company-mode)
-		(setq company-require-match 'never
-			  company-minimum-prefix-length 2
-			  company-tooltip-align-annotations t
-			  company-idle-delay 1
-			  company-tooltip-limit 20
-			  global-company-mode t))
-	#+END_SRC
-
-*** lsp
-	Client for Language Server Protocol (v3.14). lsp-mode aims to provide IDE-like experience by providing optional integration with the most popular Emacs packages like company, flycheck and projectile.
-    #+NAME: lsp-mode
-	#+BEGIN_SRC emacs-lisp
-	  (use-package lsp-mode
-		:hook ((scala-mode . lsp)
-			   (python-mode . lsp)
-			   (java-mode . lsp)
-			   (js-mode . lsp)
-			   (sh-mode . lsp)
-			   (c-mode . lsp))
-		:config
-		(setq lsp-prefer-flymake nil))
-
-
-	  ;; optionally
-	  (use-package lsp-ui
-		:after lsp-mode
-		:hook (lsp-mode-hook . lsp-ui-mode))
-
-	  (use-package company-lsp
-		:after '(company lsp-mode)
-		:config
-		(setq company-lsp-cache-candidates t
-			  company-lsp-async t
-			  company-lsp-enable-snippet t)
-		(push 'company-lsp company-backends))
-
-	  (use-package company-box
-		:diminish
-		:hook (company-mode . company-box-mode))
-
-	  ;; if you are helm user
-	  ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
-
-	  ;; if you are ivy user
-	  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-	  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-
-	  ;; optionally if you want to use debugger
-	  ;;(use-package dap-mode)
-	  ;;(use-package dap-LANGUAGE) to load the dap adapter for your language
-
-	#+END_SRC
-
-*** C
-	irony-mode is an Emacs minor-mode that aims at improving the editing experience for the C, C++ and Objective-C languages.
-	#+BEGIN_SRC emacs-lisp
-	  (use-package irony
-		:diminish
-		:hook (c++-mode-hook . irony-mode)
-		:hook (objc-mode-hook . irony-mode)
-		:hook (irony-mode . irony-cdb-autosetup-compile-options)
-		:hook (c-mode-hook . irony-mode))
-
-	  ;; support for company
-	  (use-package company-irony
-		:after '(company irony)
-		:config (add-to-list 'company-backends 'company-irony))
-
-	  ;;  This allows us to read docs while irony is working.
-	  (use-package irony-eldoc
-		:after '(irony))
-	#+END_SRC
-
-*** Java
-	#+BEGIN_SRC emacs-lisp
-	  (use-package lsp-java)
-	#+END_SRC
-*** Scala
-	Enable scala-mode and sbt-mode.
-	#+BEGIN_SRC emacs-lisp
-	  (use-package scala-mode
-		:mode "\\.s\\(cala\\|bt\\)$")
-
-	  (use-package sbt-mode
-		:diminish
-		:commands sbt-start sbt-command
-		:config
-		;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-		;; allows using SPACE when in the minibuffer
-		(substitute-key-definition
-		 'minibuffer-complete-word
-		 'self-insert-command
-		 minibuffer-local-completion-map)
-		 ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-		 (setq sbt:program-options '("-Dsbt.supershell=false")))
-	#+END_SRC
-
-*** JavaScript
-	#+BEGIN_SRC emacs-lisp
-	  (use-package js2-mode
-		:config
-		(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-	#+END_SRC
-
-*** TODO Rust
-*** TODO Go
 
 ** Org
    Org-mode is a document editing, formatting, and organizing mode, designed for notes, planning, and authoring within the free software text editor Emacs.
@@ -620,28 +473,4 @@ This is my emacs configuration in [[https://en.wikipedia.org/wiki/Literate_progr
      ;; suport for hugo exporting
      (use-package ox-hugo
        :after org)
-   #+END_SRC
-** LaTex
-   #+BEGIN_SRC emacs-lisp
-	 (use-package tex
-	   :ensure auctex
-	   :config
-	   (setq TeX-auto-save t
-			 TeX-parse-self t
-			 TeX-view-program-selection '(((output-dvi has-no-display-manager)
-										   "dvi2tty")
-										  ((output-dvi style-pstricks)
-										   "dvips and gv")
-										  (output-dvi "xdvi")
-										  (output-pdf "mupdf")
-										  (output-html "xdg-open")))
-	   (add-to-list 'TeX-view-program-list '("mupdf" "mupdf %o")))
-
-
-	 ;; company backend
-	 (use-package company-auctex
-	   :after '(company tex)
-	   :config (company-auctex-init))
-
-
    #+END_SRC
